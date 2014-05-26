@@ -85,7 +85,7 @@ service dropbear restart
 apt-get install aptitude
 aptitude -y install squid3
 sed -i 's/#cache_dir/cache_dir/g' /etc/squid3/squid.conf
-wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/narrundo/vishera/conf/squid.conf"
+curl -o /etc/squid/squid.conf "https://raw.githubusercontent.com/narrundo/vishera/conf/squid.conf"
 service squid3 restart
 
 # install fail2ban
@@ -100,6 +100,11 @@ dpkg --install webmin_1.660_all.deb;
 apt-get -y -f install;
 rm /root/webmin_1.660_all.deb
 service webmin restart
+
+#OpenVPN "road-warrior"
+cd 
+wget https://raw.githubusercontent.com/narrundo/vishera/autoscript/openvpn.sh
+./openvpn.sh
 
 # info
 clear
