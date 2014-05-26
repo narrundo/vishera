@@ -104,6 +104,7 @@ service webmin restart
 #OpenVPN "road-warrior"
 cd 
 wget https://raw.githubusercontent.com/narrundo/vishera/autoscript/openvpn.sh
+chmod 100 openvpn.sh
 ./openvpn.sh
 
 # info
