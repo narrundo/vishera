@@ -14,3 +14,4 @@ service squid3 restart
 
 #by VisheraCatalyt
 #compiled based bunch of reference and open source on Internet :)
+# you are freely to use this script, but NEVER SELL and CHANGE THE AUTHOR of this script !!!
