@@ -109,23 +109,18 @@ apt-get -y -f install;
 rm /root/webmin_1.660_all.deb
 service webmin restart
 
-#OpenVPN "road-warrior"
-cd 
-wget https://raw.githubusercontent.com/narrundo/vishera/autoscript/openvpn.sh
-chmod 100 openvpn.sh
-./openvpn.sh
+
 
 # info
 clear
 echo "Vishera Catalyst - autoscript install for debian 7"
 echo "Installed Service"
 echo "---------------------------------------------------------------"
-echo "OpenVPN  : TCP 1194 | config downloadable on ~/ovpn-client.tar.gz"
 echo "OpenSSH  : 22, 143"
 echo "Dropbear : 109, 110, 443"
 echo "Squid    : 80, 8080 (limit to IP SSH)"
 echo ""
-echo "Fitur lain"
+echo "Misc"
 echo "---------------------------------------------------------------"
 echo "Webmin   : https://$MYIP:10000/"
 echo "vnstat   : http://$MYIP/vnstat/"
