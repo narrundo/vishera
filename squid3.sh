@@ -13,7 +13,7 @@ aptitude -y install squid3
 rm -f /etc/squid3/squid.conf
 wget -P /etc/squid3/ "https://raw.githubusercontent.com/narrundo/vishera/conf/squid.conf"
 sed -i 's/#cache_dir/cache_dir/g' /etc/squid3/squid.conf
-sed -e 's,[ipserver],$IP,' /etc/squid3/squid.conf
+sed -i 's/[ipserver]/$IP/g' /etc/squid3/squid.conf
 service squid3 restart
 
 #ViperSSH Config Only
