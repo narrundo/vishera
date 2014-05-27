@@ -3,6 +3,11 @@
 # go to root
 cd
 
+# Specify our IP Server
+if [ "$IP" = "" ]; then
+IP=$(curl -s ifconfig.me)
+fi
+
 # disable ipv6
 echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
@@ -81,11 +86,14 @@ echo "/bin/false" >> /etc/shells
 service ssh restart
 service dropbear restart
 
+
 #Squid Proxy 3.1
 apt-get install aptitude
 aptitude -y install squid3
+rm -f /etc/squid3/squid.conf
+wget -P /etc/squid3/ "https://raw.githubusercontent.com/narrundo/vishera/conf/squid.conf"
 sed -i 's/#cache_dir/cache_dir/g' /etc/squid3/squid.conf
-curl -o /etc/squid/squid.conf "https://raw.githubusercontent.com/narrundo/vishera/conf/squid.conf"
+sed -i "s/ipserver/$IP/g" /etc/squid3/squid.conf
 service squid3 restart
 
 # install fail2ban
@@ -115,13 +123,12 @@ echo "---------------------------------------------------------------"
 echo "OpenVPN  : TCP 1194 | config downloadable on ~/ovpn-client.tar.gz"
 echo "OpenSSH  : 22, 143"
 echo "Dropbear : 109, 110, 443"
-echo "Squid    : 8080 (limit to IP SSH)"
+echo "Squid    : 80, 8080 (limit to IP SSH)"
 echo ""
 echo "Fitur lain"
 echo "---------------------------------------------------------------"
 echo "Webmin   : https://$MYIP:10000/"
 echo "vnstat   : http://$MYIP/vnstat/"
-echo "MRTG     : http://$MYIP/mrtg/"
 echo "Timezone : Asia/Jakarta"
 echo "Fail2Ban : [on]"
 echo "IPv6     : [off]"
