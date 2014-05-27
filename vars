@@ -1,0 +1,8 @@
+export KEY_COUNTRY="ID"
+export KEY_PROVINCE="CentralJava"
+export KEY_CITY="Semarang"
+export KEY_ORG="VisheraCatalyst"
+export KEY_EMAIL=""
+export KEY_CN="VisheraCatalyst"
+export KEY_NAME="VisheraCatalyst"
+export KEY_OU="VisheraCatalyst"
