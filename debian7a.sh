@@ -109,7 +109,12 @@ apt-get -y -f install;
 rm /root/webmin_1.660_all.deb
 service webmin restart
 
-
+#Install BadVPN
+# install badvpn
+wget -O /usr/bin/badvpn-udpgw "http://kenyangssh.com/autoscrip/file/badvpn-udpgw"
+sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
+chmod +x /usr/bin/badvpn-udpgw
+screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
 # info
 clear
