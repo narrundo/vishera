@@ -13,7 +13,7 @@ echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 
 # install wget and curl
-apt-get update;apt-get -y install wget curl;
+apt-get -y update;apt-get -y install wget curl;
 
 # set time GMT +7
 ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
@@ -37,7 +37,7 @@ apt-get -y --purge remove sendmail*;
 apt-get -y --purge remove bind9*;
 
 # update
-apt-get update;apt-get -y upgrade;
+apt-get -y update;apt-get -y upgrade;
 
 # install webserver
 apt-get -y install nginx php5-fpm php5-cli php5-mysql
@@ -81,11 +81,11 @@ apt-get -y install fail2ban;service fail2ban restart
 
 # install webmin
 cd
-apt-get update
-wget http://sourceforge.net/projects/webadmin/files/webmin/1.690/webmin-1.690.zip
-dpkg --install webmin_1.660_all.deb;
+apt-get -y update
+wget http://sourceforge.net/projects/webadmin/files/webmin/1.690/webmin_1.690_all.deb
+dpkg --install webmin_1.690_all.deb;
 apt-get -y -f install;
-rm /root/webmin_1.660_all.deb
+rm /root/webmin_1.690_all.deb
 service webmin restart
 
 #Install BadVPN
@@ -95,18 +95,6 @@ sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
-#Install SSH-HPN
-apt-get install zlib1g-dev libpam-dev libssl-dev openssl build-essential
-wget http://mirror.esc7.net/pub/OpenBSD/OpenSSH/portable/openssh-6.6p1.tar.gz
-wget http://sourceforge.net/projects/hpnssh/files/HPN-SSH%2014.5%206.6p1/openssh-6.6p1-hpnssh14v5.diff.gz
-tar -xzvf openssh-6.6p1.tar.gz
-cd openssh-6.6p1
-zcat ../openssh-6.6p1-hpnssh14v5.diff.gz | patch
-./configure --prefix=/usr --sysconfdir=/etc/ssh --with-pam
-rm /etc/ssh/ssh_config
-rm /etc/ssh/sshd_config
-make && make install
-service ssh restart
 
 # setting port ssh
 sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
