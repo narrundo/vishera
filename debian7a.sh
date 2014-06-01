@@ -56,27 +56,6 @@ apt-file update
 vnstat -u -i venet0
 service vnstat restart
 
-# install webserver
-cd
-rm /etc/nginx/sites-enabled/default
-rm /etc/nginx/sites-available/default
-mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
-curl http://script.jualssh.com/nginx.conf > /etc/nginx/nginx.conf
-curl http://script.jualssh.com/vps.conf > /etc/nginx/conf.d/vps.conf
-sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
-useradd -m vps;
-mkdir -p /home/vps/public_html
-echo "ViperSSH © 2014 | Contact Person : 089668629072 (WhatsApp)" > /home/vps/public_html/index.html
-echo "<?php phpinfo() ?>" > /home/vps/public_html/info.php
-service php5-fpm restart
-service nginx restart
-
-
-# setting port ssh
-sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
-sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
-service ssh restart
-
 # install dropbear
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
@@ -103,7 +82,7 @@ apt-get -y install fail2ban;service fail2ban restart
 # install webmin
 cd
 apt-get update
-wget "http://prdownloads.sourceforge.net/webadmin/webmin_1.660_all.deb"
+wget http://sourceforge.net/projects/webadmin/files/webmin/1.690/webmin-1.690.zip
 dpkg --install webmin_1.660_all.deb;
 apt-get -y -f install;
 rm /root/webmin_1.660_all.deb
@@ -115,6 +94,24 @@ wget -O /usr/bin/badvpn-udpgw "http://kenyangssh.com/autoscrip/file/badvpn-udpgw
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
+
+#Install SSH-HPN
+apt-get install zlib1g-dev libpam-dev libssl-dev openssl build-essential
+wget http://mirror.esc7.net/pub/OpenBSD/OpenSSH/portable/openssh-6.6p1.tar.gz
+wget http://sourceforge.net/projects/hpnssh/files/HPN-SSH%2014.5%206.6p1/openssh-6.6p1-hpnssh14v5.diff.gz
+tar -xzvf openssh-6.6p1.tar.gz
+cd openssh-6.6p1.tar.gz
+zcat ../openssh-6.6p1-hpnssh14v5.diff.gz | patch
+./configure --prefix=/usr --sysconfdir=/etc/ssh --with-pam
+rm /etc/ssh/ssh_config
+rm /etc/ssh/sshd_config
+make && make install
+service ssh restart
+
+# setting port ssh
+sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
+sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
+service ssh restart
 
 # info
 clear
