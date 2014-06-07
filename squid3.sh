@@ -1,6 +1,6 @@
 
 #Squid Proxy 3.1
-apt-get install aptitude curl
+apt-get -y install aptitude curl
 
 # Specify our IP Server
 if [ "$IP" = "" ]; then
