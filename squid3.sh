@@ -1,10 +1,12 @@
+
+#Squid Proxy 3.1
+apt-get install aptitude curl
+
 # Specify our IP Server
 if [ "$IP" = "" ]; then
         IP=$(curl -s ifconfig.me)
 fi
 
-#Squid Proxy 3.1
-apt-get install aptitude
 aptitude -y install squid3
 rm -f /etc/squid3/squid.conf
 wget -P /etc/squid3/ "https://raw.githubusercontent.com/narrundo/vishera/conf/squid.conf"
