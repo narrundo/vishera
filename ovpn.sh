@@ -10,12 +10,11 @@ wget -O /etc/openvpn/openvpn.tar "http://sourceforge.net/projects/narrundo/files
 cd /etc/openvpn/
 tar xf openvpn.tar
 wget -O /etc/openvpn/1194.conf "http://sourceforge.net/projects/narrundo/files/conf/1194.conf"
-service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 wget -O /etc/iptables.up.rules "http://sourceforge.net/projects/narrundo/files/conf/iptables.up.rules"
-sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 sed -i "s/ipserver/$IP/g" /etc/iptables.up.rules;
+sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 iptables-restore < /etc/iptables.up.rules
 service openvpn restart
 
