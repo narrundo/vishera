@@ -22,7 +22,7 @@ service openvpn restart
 # configure openvpn client config
 cd /etc/openvpn/
 wget -O /etc/openvpn/1194-client.ovpn "http://sourceforge.net/projects/narrundo/files/conf/1194-client.conf"
-sed -i $IP /etc/openvpn/1194-client.ovpn;
+sed -i "s/ipserver/$IP/g" /etc/openvpn/1194-client.ovpn
 PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
 useradd -M -s /bin/false openvpn
 echo "openvpn:$PASS" | chpasswd
