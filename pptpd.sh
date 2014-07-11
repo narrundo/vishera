@@ -4,40 +4,34 @@
 # July, 2013 v1.11
 # Author: Commander Waffles modified by Regolithmedia
 # http://www.putdispenserhere.com/pptp-debian-ubuntu-openvz-setup-script/
+# Modified by VisheraCatalyst on 11 July 2014
 
-echo "######################################################"
-echo "Interactive PoPToP Install Script for an Debian XEN VPS"
-echo "Modified by Regolithmedia for Cloud Vps"
-echo
-echo "######################################################"
+echo "---------------------------------------------------------------"
+echo "Interactive PoPToP Install Script for an Debian XEN VPS Modified by Regolithmedia"
+echo "Modified by VisheraCatalyst for ViperSSH"
 echo
 echo
-echo "######################################################"
-echo "Select on option:"
-echo "1) Set up new PoPToP server AND create one user"
-echo "2) Create additional users"
-echo "######################################################"
+echo
+echo "Pilih dari opsi berikut :"
+echo "1) Setup server PPTP baru dan buat satu user"
+echo "2) Buat user tambahan"
 read x
 if test $x -eq 1; then
-	echo "Enter username that you want to create (eg. client1 or john):"
+	echo "masukan username yang ingin dibuat(contoh : budi):"
 	read u
-	echo "Specify password that you want the server to use:"
+	echo "tentukan password yang akan digunakan :"
 	read p
 
 # get the VPS IP
 ip=`grep address /etc/network/interfaces | grep -v 127.0.0.1 | awk '{print $2}'`
 
 echo
-echo "######################################################"
-echo "Downloading and Installing PoPToP"
-echo "######################################################"
+echo "Downloading and Installing PoPToP...."
 apt-get update
 apt-get -y install pptpd
 
-echo
-echo "######################################################"
 echo "Creating Server Config"
-echo "######################################################"
+
 cat > /etc/ppp/pptpd-options <<END
 name pptpd
 refuse-pap
@@ -62,20 +56,23 @@ echo "remoteip 10.1.0.1-100" >> /etc/pptpd.conf
 # adding new user
 echo "$u	*	$p	*" >> /etc/ppp/chap-secrets
 
-echo
-echo "######################################################"
+
 echo "Forwarding IPv4 and Enabling it on boot"
-echo "######################################################"
+
 cat >> /etc/sysctl.conf <<END
 net.ipv4.ip_forward=1
 END
 sysctl -p
 
-echo
-echo "######################################################"
+
 echo "Updating IPtables Routing and Enabling it on boot"
-echo "######################################################"
+
 iptables -t nat -A POSTROUTING -j SNAT --to $ip
+
+# specify iptables for PPTP can't access certain websites 
+
+iptables -I FORWARD -p tcp --syn -i ppp+ -j TCPMSS --set-mss 1356
+
 # saves iptables routing rules and enables them on-boot
 iptables-save > /etc/iptables.conf
 
@@ -89,25 +86,23 @@ cat >> /etc/ppp/ip-up <<END
 ifconfig ppp0 mtu 1400
 END
 
-echo
-echo "######################################################"
 echo "Restarting PoPToP"
-echo "######################################################"
+
 sleep 5
 /etc/init.d/pptpd restart
 
 echo
-echo "######################################################"
 echo "Server setup complete!"
+echo "---------------------------------------------------------------"
 echo "Connect to your VPS at $ip with these credentials:"
 echo "Username:$u ##### Password: $p"
-echo "######################################################"
+echo "---------------------------------------------------------------"
 
 # runs this if option 2 is selected
 elif test $x -eq 2; then
-	echo "Enter username that you want to create (eg. client1 or john):"
+	echo "masukan username yang ingin dibuat(contoh : budi):"
 	read u
-	echo "Specify password that you want the server to use:"
+	echo "tentukan password yang akan digunakan :"
 	read p
 
 # get the VPS IP
@@ -117,11 +112,11 @@ ip=`grep address /etc/network/interfaces | grep -v 127.0.0.1 | awk '{print $2}'`
 echo "$u	*	$p	*" >> /etc/ppp/chap-secrets
 
 echo
-echo "######################################################"
+echo "---------------------------------------------------------------"
 echo "Addtional user added!"
 echo "Connect to your VPS at $ip with these credentials:"
 echo "Username:$u ##### Password: $p"
-echo "######################################################"
+echo "---------------------------------------------------------------"
 
 else
 echo "Invalid selection, quitting."
