@@ -71,7 +71,7 @@ iptables -t nat -A POSTROUTING -j SNAT --to $ip
 
 # specify iptables for PPTP can't access certain websites 
 
-iptables -I FORWARD -p tcp --syn -i ppp+ -j TCPMSS --set-mss 1356
+iptables -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 
 # saves iptables routing rules and enables them on-boot
 iptables-save > /etc/iptables.conf
