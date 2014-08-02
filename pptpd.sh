@@ -50,8 +50,8 @@ END
 # setting up pptpd.conf
 echo "option /etc/ppp/pptpd-options" > /etc/pptpd.conf
 echo "logwtmp" >> /etc/pptpd.conf
-echo "localip $ip" >> /etc/pptpd.conf
-echo "remoteip 10.1.0.1-100" >> /etc/pptpd.conf
+echo "localip 192.168.1.25" >> /etc/pptpd.conf
+echo "remoteip 192.168.1.26-100" >> /etc/pptpd.conf
 
 # adding new user
 echo "$u	*	$p	*" >> /etc/ppp/chap-secrets
