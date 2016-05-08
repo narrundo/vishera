@@ -30,6 +30,9 @@ rm -f run.sh
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/run.sh
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/startup.sh
 chmod 755 run.sh
+chmod 755 startup.sh
+chown -R root startup.sh
+
 cd config
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/permissions.ini
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/permissions.ini
