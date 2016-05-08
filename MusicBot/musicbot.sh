@@ -28,12 +28,13 @@ git checkout review
 sudo -H pip3.5 install --upgrade -r requirements.txt
 rm -f run.sh
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/run.sh
+wget https://github.com/narrundo/vishera/raw/master/MusicBot/startup.sh
 chmod 755 run.sh
 cd config
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/permissions.ini
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/permissions.ini
 cd cd
-sed -i '$ i\sh /root/MusiBot/run.sh' /etc/rc.local
+sed -i '$ i\sh /root/MusicBot/startup.sh' /etc/rc.local
 
 echo "MusicBot for Discord installation is done !"
 echo "go to MusicBot/config and re-configure your permission.ini and options.ini"
