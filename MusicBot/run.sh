@@ -6,4 +6,4 @@ python3.5 -V > /dev/null 2>&1 || {
 	exit 1; }
 cd
 cd MusicBot
-nohup python3.5 run.py
+python3.5 run.py > thislog.log
