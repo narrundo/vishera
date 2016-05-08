@@ -12,3 +12,10 @@ sudo apt-get install libffi-dev -y
 sudo apt-get install libsodium-dev -y
 wget https://bootstrap.pypa.io/get-pip.py
 sudo python3.5 get-pip.py
+git clone https://github.com/SexualRhinoceros/MusicBot.git MusicBot
+cd MusicBot
+git checkout review
+sudo -H pip3.5 install --upgrade -r requirements.txt
+chmod 755 run.sh
+cd
+sed -i '$ i\sh /root/MusiBot/run.sh' /etc/rc.local
