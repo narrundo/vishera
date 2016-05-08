@@ -17,5 +17,8 @@ cd MusicBot
 git checkout review
 sudo -H pip3.5 install --upgrade -r requirements.txt
 chmod 755 run.sh
-cd
+cd config
+wget https://github.com/narrundo/vishera/raw/master/options.ini
+wget https://github.com/narrundo/vishera/raw/master/permissions.ini
+cd cd
 sed -i '$ i\sh /root/MusiBot/run.sh' /etc/rc.local
