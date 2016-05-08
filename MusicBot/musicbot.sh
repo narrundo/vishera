@@ -26,6 +26,8 @@ git clone https://github.com/SexualRhinoceros/MusicBot.git MusicBot
 cd MusicBot
 git checkout review
 sudo -H pip3.5 install --upgrade -r requirements.txt
+rm -f run.sh
+wget https://github.com/narrundo/vishera/raw/master/MusicBot/run.sh
 chmod 755 run.sh
 cd config
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/permissions.ini
