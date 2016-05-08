@@ -1,4 +1,3 @@
 #!/bin/bash
 
-sleep 80
-sh run.sh
+screen -d -m -t musicbot sh /root/MusicBot/run.sh
