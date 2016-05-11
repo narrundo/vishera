@@ -37,7 +37,8 @@ chown -R root run.sh
 cd config
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/permissions.ini
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/permissions.ini
-cd cd
+cd 
+cd
 sed -i '$ i\sh /root/MusicBot/startup.sh' /etc/rc.local
 
 echo "MusicBot for Discord installation is done !"
