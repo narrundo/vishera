@@ -22,9 +22,8 @@ sudo apt-get install libsodium-dev -y
 wget https://bootstrap.pypa.io/get-pip.py
 sudo python3.5 get-pip.py
 
-git clone https://github.com/SexualRhinoceros/MusicBot.git MusicBot
+git clone https://github.com/SexualRhinoceros/MusicBot.git MusicBot -b master
 cd MusicBot
-git checkout review
 sudo -H pip3.5 install --upgrade -r requirements.txt
 rm -f run.sh
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/run.sh
