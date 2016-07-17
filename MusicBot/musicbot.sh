@@ -2,7 +2,7 @@ clear
 echo "MusicBot for Discord quick-setup script by narrundo"
 sleep 3 
 echo "MusicBot by SexualRhinocheros"
-echo "version 1.9.5 review-branch"
+echo "17 July 2016"
 sleep 2 
 echo "initializing..."
 sleep 5 
@@ -25,6 +25,7 @@ sudo python3.5 get-pip.py
 git clone https://github.com/SexualRhinoceros/MusicBot.git MusicBot -b master
 cd MusicBot
 sudo -H pip3.5 install --upgrade -r requirements.txt
+sudo python3.5 -m pip install --upgrade pip
 rm -f run.sh
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/run.sh
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/startup.sh
@@ -34,7 +35,7 @@ chown -R root startup.sh
 chown -R root run.sh
 
 cd config
-wget https://github.com/narrundo/vishera/raw/master/MusicBot/permissions.ini
+wget https://github.com/narrundo/vishera/raw/master/MusicBot/options.ini
 wget https://github.com/narrundo/vishera/raw/master/MusicBot/permissions.ini
 cd 
 cd
