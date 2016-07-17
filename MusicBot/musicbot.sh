@@ -21,6 +21,7 @@ sudo apt-get install libffi-dev -y
 sudo apt-get install libsodium-dev -y
 wget https://bootstrap.pypa.io/get-pip.py
 sudo python3.5 get-pip.py
+clear
 
 git clone https://github.com/SexualRhinoceros/MusicBot.git MusicBot -b master
 cd MusicBot
@@ -41,10 +42,11 @@ cd
 cd
 sed -i '$ i\sh /root/MusicBot/startup.sh' /etc/rc.local
 
+clear
 echo "MusicBot for Discord installation is done !"
 echo "go to MusicBot/config and re-configure your permission.ini and options.ini"
 echo "you may need to cross-check the parameter with example one due to update!"
 echo ""
 echo "enjoy :)"
 sleep 5
-clear
+
